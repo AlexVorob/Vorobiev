@@ -82,13 +82,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F26A5A7217EFD5300945E5F /* Structure */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Structure;
-			sourceTree = "<group>";
-		};
 		3F274A5F2179BDF00053516C = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +103,6 @@
 			children = (
 				585186D221819BBD008AD9AA /* Types */,
 				5801E43A217F015F007E347F /* Extensions */,
-				3F26A5A7217EFD5300945E5F /* Structure */,
 				3F274A872179C40F0053516C /* Classes */,
 				3F274A842179C3ED0053516C /* Protocols */,
 				3F274A6B2179BDF00053516C /* main.swift */,
@@ -133,15 +125,11 @@
 		3F274A872179C40F0053516C /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				3F274A722179BE2F0053516C /* Staff.swift */,
-				3F274A742179BE930053516C /* Director.swift */,
-				3F274A762179BED60053516C /* Washer.swift */,
-				3F274A782179BF870053516C /* Accountant.swift */,
+				5877418221B7EBEA00622089 /* Staff */,
 				3F274A7C2179C0970053516C /* Car.swift */,
 				3F274A8A2179C56B0053516C /* CarWashingService.swift */,
 				5877B3F521874E8E00CE187E /* Queue.swift */,
 				5853AAC22192D05700CE3B7F /* CarFactory.swift */,
-				58554F1C219ABE2A0069EAF6 /* Manager.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -166,6 +154,18 @@
 				58616BFB2189DC2F00853320 /* Atomic.swift */,
 			);
 			path = Types;
+			sourceTree = "<group>";
+		};
+		5877418221B7EBEA00622089 /* Staff */ = {
+			isa = PBXGroup;
+			children = (
+				3F274A722179BE2F0053516C /* Staff.swift */,
+				3F274A762179BED60053516C /* Washer.swift */,
+				3F274A742179BE930053516C /* Director.swift */,
+				3F274A782179BF870053516C /* Accountant.swift */,
+				58554F1C219ABE2A0069EAF6 /* Manager.swift */,
+			);
+			path = Staff;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
