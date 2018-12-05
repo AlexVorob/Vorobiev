@@ -10,7 +10,7 @@ let washingService = CarWashingService(accountant: accountant, director: directo
 var factory = CarFactory(carWashingService: washingService)
 
 factory.timerTokenCarEmission()
-sleep(6)
-factory.stop()
+//sleep(22)
+//factory.stop()
 
 RunLoop.current.run()

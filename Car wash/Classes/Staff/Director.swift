@@ -11,10 +11,10 @@ import Foundation
 class Director: Manager<Accountant> {
     
     override func completeProcessing(object: Accountant) {
-        if object.countQueueObjects == 0 {
-            object.state = .available
-        }
         print("\(self.name) take money from Accountant - \(self.money)")
+//        if object.countQueueObjects == 0 {
+//            object.state = .available
+//        }
     }
     
     override func finishProcessing() {

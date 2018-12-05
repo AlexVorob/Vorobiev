@@ -78,7 +78,7 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     }
     
     func finishProcessing() {
-        
+        self.queueObjects.dequeue().do(self.asyncWork)
     }
 
     func doAsyncWork(object: ProcessedObject) {
@@ -96,7 +96,6 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         self.queue.asyncAfter(deadline: .after(interval: .random(in: 0.0...1.0))) {
             self.process(object: object)
             self.completeProcessing(object: object)
-            self.queueObjects.dequeue().do(self.asyncWork)
             self.finishProcessing()
         }
     }
