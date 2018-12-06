@@ -41,7 +41,7 @@ class CarWashingService: Observer {
         }
     }
     
-    func processStateWaitForProcessing<T>(sender: T) {
+    func processStateWaitForProcessing<SenderObject>(sender: SenderObject) {
         if let washer = sender as? Washer {
             self.accountant.doAsyncWork(object: washer)
         } else {
@@ -49,7 +49,7 @@ class CarWashingService: Observer {
         }
     }
     
-    func processStateAvailable<T>(sender: T) {
+    func processStateAvailable<SenderObject>(sender: SenderObject) {
         if let washer = sender as? Washer {
             self.cars.dequeue().do(washer.doAsyncWork)
         } else {

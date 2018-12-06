@@ -10,7 +10,7 @@ import Foundation
 
 protocol Observer: class {
     
-    func processStateWaitForProcessing<T>(sender: T)
+    func processStateWaitForProcessing<SenderObject>(sender: SenderObject)
     
-    func processStateAvailable<T>(sender: T)
+    func processStateAvailable<SenderObject>(sender: SenderObject)
 }
