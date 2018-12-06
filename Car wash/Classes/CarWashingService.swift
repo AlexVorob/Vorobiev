@@ -53,10 +53,9 @@ class CarWashingService: Observer {
         if let washer = sender as? Washer {
             self.cars.dequeue().do(washer.doAsyncWork)
         } else {
-//            if self.accountant.countQueueObjects != 0 {
-//                self.accountant.finishProcessing()
-//                // or doAsynkWork
-//            }
+            if self.accountant.countQueueObjects != 0 {
+                self.accountant.finishProcessing()
+            }
         }
     }
 }
