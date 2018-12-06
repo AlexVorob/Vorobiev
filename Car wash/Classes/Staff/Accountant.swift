@@ -12,10 +12,5 @@ class Accountant: Manager<Washer> {
     
     override func finishProcessing() {
         print("\(self.name) took money from Washer! - \(self.money)")
-        if self.countQueueObjects == 0 {
-            self.state = .waitForProcessing
-        } else {
-            super.finishProcessing()
-        }
     }
 }

@@ -54,7 +54,7 @@ class CarWashingService: Observer {
             self.cars.dequeue().do(washer.doAsyncWork)
         } else {
             if self.accountant.countQueueObjects != 0 {
-                self.accountant.finishProcessing()
+                self.accountant.processingQueue()
             }
         }
     }

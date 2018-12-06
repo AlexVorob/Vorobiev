@@ -12,9 +12,7 @@ class Director: Manager<Accountant> {
     
     override func completeProcessing(object: Accountant) {
         print("\(self.name) take money from Accountant - \(self.money)")
-//        if object.countQueueObjects == 0 {
-//            object.state = .available
-//        }
+        super.completeProcessing(object: object)
     }
     
     override func finishProcessing() {

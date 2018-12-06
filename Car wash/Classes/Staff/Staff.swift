@@ -81,6 +81,10 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         self.queueObjects.dequeue().do(self.asyncWork)
     }
 
+    func processingQueue() {
+        self.queueObjects.dequeue().do(self.doAsyncWork)
+    }
+    
     func doAsyncWork(object: ProcessedObject) {
         self.atomicState.transform { objectState in
             if objectState == .available {
