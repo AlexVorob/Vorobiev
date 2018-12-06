@@ -21,9 +21,14 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
         set {
             self.atomicState.value = newValue
             switch newValue {
-            case .available: observer?.processStateAvailable(sender: self)
+            case .available:
+                if self.countQueueObjects != 0 {
+                    self.queueObjects.dequeue().do(self.doAsyncWork)
+                } else {
+                    self.observer?.processStateAvailable(sender: self)
+                }
             case .busy: break
-            case .waitForProcessing: observer?.processStateWaitForProcessing(sender: self)
+            case .waitForProcessing: self.observer?.processStateWaitForProcessing(sender: self)
             }
         }
     }
@@ -81,10 +86,6 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
         self.queueObjects.dequeue().do(self.asyncWork)
     }
 
-    func processingQueue() {
-        self.queueObjects.dequeue().do(self.doAsyncWork)
-    }
-    
     func doAsyncWork(object: ProcessedObject) {
         self.atomicState.transform { objectState in
             if objectState == .available {

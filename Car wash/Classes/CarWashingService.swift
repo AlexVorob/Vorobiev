@@ -52,10 +52,6 @@ class CarWashingService: Observer {
     func processStateAvailable<SenderObject>(sender: SenderObject) {
         if let washer = sender as? Washer {
             self.cars.dequeue().do(washer.doAsyncWork)
-        } else {
-            if self.accountant.countQueueObjects != 0 {
-                self.accountant.processingQueue()
-            }
         }
     }
 }
