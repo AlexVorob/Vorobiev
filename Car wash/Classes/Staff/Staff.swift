@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
+class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, Observable {
     
     enum ProcessingState {
         case busy
@@ -21,9 +21,9 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         set {
             self.atomicState.value = newValue
             switch newValue {
-            case .available: observer?.handlStateAvailable(sender: self)
+            case .available: observer?.processStateAvailable(sender: self)
             case .busy: break
-            case .waitForProcessing: observer?.handlStateWaitForProcessing(sender: self)
+            case .waitForProcessing: observer?.processStateWaitForProcessing(sender: self)
             }
         }
     }
@@ -102,5 +102,13 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
             self.completeProcessing(object: object)
             self.finishProcessing()
         }
+    }
+    
+    func addObserver(observer: Observer) {
+        self.observer = observer
+    }
+    
+    func deleteObserver() {
+        self.observer = nil
     }
 }

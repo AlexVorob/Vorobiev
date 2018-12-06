@@ -10,5 +10,7 @@ import Foundation
 
 protocol Observable {
     
-    func notify()
+    func addObserver(observer: Observer)
+    
+    func deleteObserver()
 }

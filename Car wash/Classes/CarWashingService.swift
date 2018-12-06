@@ -24,9 +24,9 @@ class CarWashingService: Observer {
         self.director = director
         self.washers = Atomic(washersAvailable)
         
-        self.accountant.observer = self
+        self.accountant.addObserver(observer: self)
         self.washers.value.forEach { washer in
-            washer.observer =  self
+            washer.addObserver(observer: self)
         }
     }
     
@@ -41,7 +41,7 @@ class CarWashingService: Observer {
         }
     }
     
-    func handlStateWaitForProcessing<T>(sender: T) {
+    func processStateWaitForProcessing<T>(sender: T) {
         if let washer = sender as? Washer {
             self.accountant.doAsyncWork(object: washer)
         } else {
@@ -49,7 +49,7 @@ class CarWashingService: Observer {
         }
     }
     
-    func handlStateAvailable<T>(sender: T) {
+    func processStateAvailable<T>(sender: T) {
         if let washer = sender as? Washer {
             self.cars.dequeue().do(washer.doAsyncWork)
         } else {
