@@ -8,7 +8,30 @@
 
 import Foundation
 
-class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, Observable {
+class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
+    
+   public class Observer {
+        
+        public typealias Handler = (ProcessingState) -> ()
+        
+        public var isObserving: Bool {
+            return self.sender != nil
+        }
+        
+        fileprivate let handler: Handler
+        private weak var sender: Staff?
+        
+        public init(sender: Staff, handler: @escaping Handler) {
+            self.sender = sender
+            self.handler = handler
+        }
+    
+        public func cancel() {
+            self.sender = nil
+        }
+    
+        
+    }
     
     enum ProcessingState {
         case busy
@@ -19,17 +42,20 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
     var state: ProcessingState {
         get { return atomicState.value }
         set {
-            self.atomicState.value = newValue
-            switch newValue {
-            case .available:
-                if self.countQueueObjects != 0 {
-                    self.queueObjects.dequeue().do(self.doAsyncWork)
-                } else {
-                    self.observer?.processStateAvailable(sender: self)
-                }
-            case .busy: break
-            case .waitForProcessing: self.observer?.processStateWaitForProcessing(sender: self)
+            self.atomicState.modify {
+                $0 = newValue
+                self.notify(state: newValue)
             }
+//            switch newValue {
+//            case .available:
+//                if self.countQueueObjects != 0 {
+//                    self.queueObjects.dequeue().do(self.doAsyncWork)
+//                } else {
+//                    self.observer?.processStateAvailable(sender: self)
+//                }
+//            case .busy: break
+//            case .waitForProcessing: self.observer?.processStateWaitForProcessing(sender: self)
+//            }
         }
     }
     
@@ -41,11 +67,10 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
         return self.queueObjects.count
     }
     
-    weak var observer: Observer?
-    
     let name: String
     let queueObjects = Queue<ProcessedObject>()
     
+    private let atomicObservers = Atomic([Observer]())
     private let atomicState = Atomic(ProcessingState.available)
     private let atomicMoney = Atomic(0)
     private let queue: DispatchQueue
@@ -53,12 +78,37 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
     init (
         money: Int,
         name: String,
-        queue: DispatchQueue
+        queue: DispatchQueue = .background
     ) {
         self.atomicMoney.value = money
         self.name = name
         self.queue = queue
     }
+    
+    func observer(handler: @escaping Observer.Handler) -> Observer {
+        return self.atomicObservers.modify {
+            let observer = Observer(sender: self, handler: handler)
+            $0.append(observer)
+            observer.handler(self.state)
+            
+            return observer
+        }
+    }
+    
+    private func notify(state: ProcessingState) {
+        self.atomicObservers.modify {
+            $0 = $0.filter { !$0.isObserving }
+            $0.forEach { $0.handler(state) }
+        }
+    }
+    
+//    func cornerCase() {
+//        if self.countQueueObjects != 0 {
+//            self.queueObjects.dequeue().do(self.doAsyncWork)
+//        } else {
+//            self.observer?.processStateAvailable(sender: self)
+//        }
+//    }
     
     func giveMoney() -> Int {
         return self.atomicMoney.modify { money in
@@ -83,6 +133,7 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
     }
     
     func finishProcessing() {
+        // reapiting func
         self.queueObjects.dequeue().do(self.asyncWork)
     }
 
@@ -103,13 +154,5 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable, O
             self.completeProcessing(object: object)
             self.finishProcessing()
         }
-    }
-    
-    func addObserver(observer: Observer) {
-        self.observer = observer
-    }
-    
-    func deleteObserver() {
-        self.observer = nil
     }
 }

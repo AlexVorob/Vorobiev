@@ -23,6 +23,7 @@ class CarFactory {
     }
     
     deinit {
+        timerToken?.stop()
         self.stop()
         print("deinit !!!!!!!")
     }

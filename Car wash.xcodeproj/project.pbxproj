@@ -25,8 +25,6 @@
 		58554F1D219ABE2A0069EAF6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58554F1C219ABE2A0069EAF6 /* Manager.swift */; };
 		58616BFC2189DC2F00853320 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58616BFB2189DC2F00853320 /* Atomic.swift */; };
 		58616BFE2189DEA700853320 /* NSLocking+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58616BFD2189DEA700853320 /* NSLocking+Extensions.swift */; };
-		5877417F21B7B89700622089 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877417E21B7B89700622089 /* Observer.swift */; };
-		5877418121B7B8CD00622089 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877418021B7B8CD00622089 /* Observable.swift */; };
 		5877B3F621874E8E00CE187E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877B3F521874E8E00CE187E /* Queue.swift */; };
 		587D53932183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */; };
 		587D53952183075D00BC4D2A /* Strideable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53942183075D00BC4D2A /* Strideable+Extensions.swift */; };
@@ -64,8 +62,6 @@
 		58554F1C219ABE2A0069EAF6 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		58616BFB2189DC2F00853320 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		58616BFD2189DEA700853320 /* NSLocking+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extensions.swift"; sourceTree = "<group>"; };
-		5877417E21B7B89700622089 /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
-		5877418021B7B8CD00622089 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		5877B3F521874E8E00CE187E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Extensions.swift"; sourceTree = "<group>"; };
 		587D53942183075D00BC4D2A /* Strideable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strideable+Extensions.swift"; sourceTree = "<group>"; };
@@ -116,8 +112,6 @@
 				5801E43D217FC9A8007E347F /* MoneyGiver.swift */,
 				5801E43F217FCA9F007E347F /* MoneyReceiver.swift */,
 				5853AAC421931D0200CE3B7F /* Statable.swift */,
-				5877417E21B7B89700622089 /* Observer.swift */,
-				5877418021B7B8CD00622089 /* Observable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -243,11 +237,9 @@
 				3F274A8B2179C56B0053516C /* CarWashingService.swift in Sources */,
 				5877B3F621874E8E00CE187E /* Queue.swift in Sources */,
 				3F274A6C2179BDF00053516C /* main.swift in Sources */,
-				5877417F21B7B89700622089 /* Observer.swift in Sources */,
 				58554F1D219ABE2A0069EAF6 /* Manager.swift in Sources */,
 				5834E9BE21B8074E00AF5EB2 /* Director.swift in Sources */,
 				58616BFE2189DEA700853320 /* NSLocking+Extensions.swift in Sources */,
-				5877418121B7B8CD00622089 /* Observable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

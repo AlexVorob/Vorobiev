@@ -18,7 +18,8 @@ class Manager<ProcessedObject: MoneyGiver & Statable>: Staff<ProcessedObject> {
         object.state = .available
         if self.countQueueObjects == 0 {
             self.state = .waitForProcessing
-        } else {
+        }
+        else {
             super.finishProcessing()
         }
     }
