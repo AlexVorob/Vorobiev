@@ -39,20 +39,6 @@ class CarWashingService {
         }
     }
     
-//    func processStateWaitForProcessing<SenderObject>(sender: SenderObject) {
-//        if let washer = sender as? Washer {
-//            self.accountant.doAsyncWork(object: washer)
-//        } else {
-//            self.director.doAsyncWork(object: self.accountant)
-//        }
-//    }
-//
-//    func processStateAvailable<SenderObject>(sender: SenderObject) {
-//        if let washer = sender as? Washer {
-//            self.cars.dequeue().do(washer.doAsyncWork)
-//        }
-//    }
-    
     private func initialObserver() {
         self.washers.value.forEach { washer in
             washer.observer { [weak self] in
@@ -79,3 +65,18 @@ class CarWashingService {
         }
     }
 }
+
+
+//    func processStateWaitForProcessing<SenderObject>(sender: SenderObject) {
+//        if let washer = sender as? Washer {
+//            self.accountant.doAsyncWork(object: washer)
+//        } else {
+//            self.director.doAsyncWork(object: self.accountant)
+//        }
+//    }
+//
+//    func processStateAvailable<SenderObject>(sender: SenderObject) {
+//        if let washer = sender as? Washer {
+//            self.cars.dequeue().do(washer.doAsyncWork)
+//        }
+//    }

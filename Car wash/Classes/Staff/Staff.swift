@@ -29,8 +29,6 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         public func cancel() {
             self.sender = nil
         }
-    
-        
     }
     
     enum ProcessingState {
@@ -42,20 +40,11 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     var state: ProcessingState {
         get { return atomicState.value }
         set {
+            guard self.state != newValue else { return }
             self.atomicState.modify {
                 $0 = newValue
                 self.notify(state: newValue)
             }
-//            switch newValue {
-//            case .available:
-//                if self.countQueueObjects != 0 {
-//                    self.queueObjects.dequeue().do(self.doAsyncWork)
-//                } else {
-//                    self.observer?.processStateAvailable(sender: self)
-//                }
-//            case .busy: break
-//            case .waitForProcessing: self.observer?.processStateWaitForProcessing(sender: self)
-//            }
         }
     }
     
@@ -102,13 +91,11 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         }
     }
     
-//    func cornerCase() {
-//        if self.countQueueObjects != 0 {
-//            self.queueObjects.dequeue().do(self.doAsyncWork)
-//        } else {
-//            self.observer?.processStateAvailable(sender: self)
-//        }
-//    }
+    func processQueue() {
+        if self.countQueueObjects != 0 {
+            self.queueObjects.dequeue().do(self.doAsyncWork)
+        }
+    }
     
     func giveMoney() -> Int {
         return self.atomicMoney.modify { money in
