@@ -41,10 +41,12 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
         get { return atomicState.value }
         set {
             guard self.state != newValue else { return }
-            self.atomicState.modify {
-                $0 = newValue
-                self.notify(state: newValue)
-            }
+//            self.atomicState.modify {
+//                $0 = newValue
+//                self.notify(state: newValue)
+//            }
+            self.atomicState.value = newValue
+            self.notify(state: newValue)
         }
     }
     
@@ -86,7 +88,7 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     
     private func notify(state: ProcessingState) {
         self.atomicObservers.modify {
-            $0 = $0.filter { !$0.isObserving }
+            $0 = $0.filter { $0.isObserving }
             $0.forEach { $0.handler(state) }
         }
     }
@@ -125,9 +127,9 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     }
 
     func doAsyncWork(object: ProcessedObject) {
-        self.atomicState.transform { objectState in
-            if objectState == .available {
-                self.state = .busy
+        self.atomicState.modify {
+            if $0 == .available {
+                $0 = .busy
                 self.asyncWork(object: object)
             } else {
                 self.queueObjects.enqueue(value: object)
