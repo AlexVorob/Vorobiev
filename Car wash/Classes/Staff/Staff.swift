@@ -94,9 +94,7 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     }
     
     func processQueue() {
-        if self.countQueueObjects != 0 {
             self.queueObjects.dequeue().do(self.doAsyncWork)
-        }
     }
     
     func giveMoney() -> Int {
@@ -122,8 +120,12 @@ class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
     }
     
     func finishProcessing() {
-        // reapiting func
-        self.queueObjects.dequeue().do(self.asyncWork)
+        if self.countQueueObjects == 0 {
+            self.state = .waitForProcessing
+        } else {
+            self.queueObjects.dequeue().do(self.asyncWork)
+        }
+        
     }
 
     func doAsyncWork(object: ProcessedObject) {

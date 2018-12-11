@@ -23,6 +23,7 @@
 		5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC22192D05700CE3B7F /* CarFactory.swift */; };
 		5853AAC521931D0200CE3B7F /* Statable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC421931D0200CE3B7F /* Statable.swift */; };
 		58554F1D219ABE2A0069EAF6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58554F1C219ABE2A0069EAF6 /* Manager.swift */; };
+		585ED5D221BFF6B500ECB33B /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585ED5D121BFF6B500ECB33B /* Person.swift */; };
 		58616BFC2189DC2F00853320 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58616BFB2189DC2F00853320 /* Atomic.swift */; };
 		58616BFE2189DEA700853320 /* NSLocking+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58616BFD2189DEA700853320 /* NSLocking+Extensions.swift */; };
 		5877B3F621874E8E00CE187E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877B3F521874E8E00CE187E /* Queue.swift */; };
@@ -60,6 +61,7 @@
 		5853AAC22192D05700CE3B7F /* CarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarFactory.swift; sourceTree = "<group>"; };
 		5853AAC421931D0200CE3B7F /* Statable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statable.swift; sourceTree = "<group>"; };
 		58554F1C219ABE2A0069EAF6 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		585ED5D121BFF6B500ECB33B /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		58616BFB2189DC2F00853320 /* Atomic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		58616BFD2189DEA700853320 /* NSLocking+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLocking+Extensions.swift"; sourceTree = "<group>"; };
 		5877B3F521874E8E00CE187E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				5834E9BD21B8074E00AF5EB2 /* Director.swift */,
 				3F274A782179BF870053516C /* Accountant.swift */,
 				58554F1C219ABE2A0069EAF6 /* Manager.swift */,
+				585ED5D121BFF6B500ECB33B /* Person.swift */,
 			);
 			path = Staff;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 				5853AAC521931D0200CE3B7F /* Statable.swift in Sources */,
 				587D53952183075D00BC4D2A /* Strideable+Extensions.swift in Sources */,
 				5801E440217FCA9F007E347F /* MoneyReceiver.swift in Sources */,
+				585ED5D221BFF6B500ECB33B /* Person.swift in Sources */,
 				58325AEC218058210057AFC2 /* DispatchQueue+Extensions.swift in Sources */,
 				3F274A772179BED60053516C /* Washer.swift in Sources */,
 				3F274A792179BF870053516C /* Accountant.swift in Sources */,

@@ -22,6 +22,5 @@ class Washer: Staff<Car> {
     override func finishProcessing() {
         print("\(self.name) take money from Car - \(self.money)")
         super.finishProcessing()
-        self.state = .waitForProcessing
     }
 }
