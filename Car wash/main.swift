@@ -7,7 +7,7 @@ let washers = ["Alex", "Niko", "Bill", "Petro"].map { Washer(name: $0) }
 
 let washingService = CarWashingService(accountant: accountant, director: director, washersAvailable: washers)
 
-var factory = CarFactory(carWashingService: washingService)
+let factory = CarFactory(carWashingService: washingService)
 
 factory.timerTokenCarEmission()
 //sleep(22)
