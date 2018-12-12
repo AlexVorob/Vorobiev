@@ -34,8 +34,8 @@ class CarFactory {
 
     func timerTokenCarEmission() {
         self.timerToken = queue.timerToken(interval: 5.0) { [weak self] in
-                self?.continueEmission()
-            }
+            self?.continueEmission()
+        }
     }
     
     func stop() {
