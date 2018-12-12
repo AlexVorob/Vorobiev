@@ -29,6 +29,7 @@
 		5877B3F621874E8E00CE187E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877B3F521874E8E00CE187E /* Queue.swift */; };
 		587D53932183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */; };
 		587D53952183075D00BC4D2A /* Strideable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53942183075D00BC4D2A /* Strideable+Extensions.swift */; };
+		587E1F1C21C115720014CCDF /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587E1F1B21C115720014CCDF /* Observer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +68,7 @@
 		5877B3F521874E8E00CE187E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Extensions.swift"; sourceTree = "<group>"; };
 		587D53942183075D00BC4D2A /* Strideable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strideable+Extensions.swift"; sourceTree = "<group>"; };
+		587E1F1B21C115720014CCDF /* Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				3F274A8A2179C56B0053516C /* CarWashingService.swift */,
 				5877B3F521874E8E00CE187E /* Queue.swift */,
 				5853AAC22192D05700CE3B7F /* CarFactory.swift */,
+				587E1F1B21C115720014CCDF /* Observer.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				58616BFC2189DC2F00853320 /* Atomic.swift in Sources */,
 				5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */,
 				58325AEE21805A360057AFC2 /* DispatchTime+Extensions.swift in Sources */,
+				587E1F1C21C115720014CCDF /* Observer.swift in Sources */,
 				3F274A7D2179C0970053516C /* Car.swift in Sources */,
 				5801E43E217FC9A8007E347F /* MoneyGiver.swift in Sources */,
 				3F274A8B2179C56B0053516C /* CarWashingService.swift in Sources */,

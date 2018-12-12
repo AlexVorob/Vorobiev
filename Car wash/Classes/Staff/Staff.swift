@@ -8,43 +8,12 @@
 
 import Foundation
 
-class Staff<ProcessedObject: MoneyGiver>: MoneyReceiver, MoneyGiver, Statable {
-    
-   public class Observer {
-        
-        public typealias Handler = (ProcessingState) -> ()
-        
-        public var isObserving: Bool {
-            return self.sender != nil
-        }
-        
-        fileprivate let handler: Handler
-        private weak var sender: Staff?
-        
-        public init(sender: Staff, handler: @escaping Handler) {
-            self.sender = sender
-            self.handler = handler
-        }
-    
-        public func cancel() {
-            self.sender = nil
-        }
-    }
-    
-    enum ProcessingState {
-        case busy
-        case waitForProcessing
-        case available
-    }
+class Staff<ProcessedObject: MoneyGiver>: Person, MoneyReceiver, MoneyGiver, Statable {
     
     var state: ProcessingState {
         get { return atomicState.value }
         set {
             guard self.state != newValue else { return }
-//            self.atomicState.modify {
-//                $0 = newValue
-//                self.notify(state: newValue)
-//            }
             self.atomicState.value = newValue
             self.notify(state: newValue)
         }

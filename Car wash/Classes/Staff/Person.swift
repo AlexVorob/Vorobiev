@@ -10,4 +10,11 @@ import Foundation
 
 class Person {
     
+    enum ProcessingState {
+        case busy
+        case waitForProcessing
+        case available
+    }
+    
+    
 }

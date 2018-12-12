@@ -10,7 +10,7 @@ import Foundation
 
 class CarWashingService {
     
-    //private var allObservers: Observer
+    private var allObservers = [Observer]()
 
     private let accountant: Accountant
     private let director: Director
@@ -41,11 +41,11 @@ class CarWashingService {
     
     private func initialObserver() {
         self.washers.value.forEach { washer in
-            washer.observer {
+            washer.observer { [weak self] in
                 switch $0 {
-                case .available: self.cars.dequeue().do(washer.doAsyncWork)
+                case .available: self?.cars.dequeue().apply(washer.doAsyncWork)
                 case .busy: return
-                case .waitForProcessing: self.accountant.doAsyncWork(object: washer)
+                case .waitForProcessing: self?.accountant.doAsyncWork(object: washer)
                 }
             }
         }
@@ -65,18 +65,3 @@ class CarWashingService {
         }
     }
 }
-
-
-//    func processStateWaitForProcessing<SenderObject>(sender: SenderObject) {
-//        if let washer = sender as? Washer {
-//            self.accountant.doAsyncWork(object: washer)
-//        } else {
-//            self.director.doAsyncWork(object: self.accountant)
-//        }
-//    }
-//
-//    func processStateAvailable<SenderObject>(sender: SenderObject) {
-//        if let washer = sender as? Washer {
-//            self.cars.dequeue().do(washer.doAsyncWork)
-//        }
-//    }
