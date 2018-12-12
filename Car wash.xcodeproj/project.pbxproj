@@ -158,12 +158,12 @@
 		5877418221B7EBEA00622089 /* Staff */ = {
 			isa = PBXGroup;
 			children = (
+				585ED5D121BFF6B500ECB33B /* Person.swift */,
 				3F274A722179BE2F0053516C /* Staff.swift */,
 				3F274A762179BED60053516C /* Washer.swift */,
 				5834E9BD21B8074E00AF5EB2 /* Director.swift */,
 				3F274A782179BF870053516C /* Accountant.swift */,
 				58554F1C219ABE2A0069EAF6 /* Manager.swift */,
-				585ED5D121BFF6B500ECB33B /* Person.swift */,
 			);
 			path = Staff;
 			sourceTree = "<group>";

@@ -10,12 +10,18 @@ import Foundation
 
 class CarWashingService {
     
-    private var allObservers = [Observer]()
+    private var staffObservers = [Observer]()
 
     private let accountant: Accountant
     private let director: Director
     private let washers: Atomic<[Washer]>
     private let cars = Queue<Car>()
+    
+    deinit {
+        self.staffObservers.forEach {
+            $0.cancel()
+        }
+    }
     
     init(
         accountant: Accountant,
@@ -25,7 +31,7 @@ class CarWashingService {
         self.accountant = accountant
         self.director = director
         self.washers = Atomic(washersAvailable)
-        self.initialObserver()
+        self.initializationObservers()
     }
     
     func wash(car: Car) {
@@ -39,29 +45,32 @@ class CarWashingService {
         }
     }
     
-    private func initialObserver() {
+    private func initializationObservers() {
         self.washers.value.forEach { washer in
-            washer.observer { [weak self] in
+            let observer = washer.observer { [weak washer, weak self] in
                 switch $0 {
-                case .available: self?.cars.dequeue().apply(washer.doAsyncWork)
+                case .available: self?.cars.dequeue().apply(washer?.doAsyncWork)
                 case .busy: return
-                case .waitForProcessing: self?.accountant.doAsyncWork(object: washer)
+                case .waitForProcessing: washer.apply(self?.accountant.doAsyncWork)
                 }
             }
+            self.staffObservers.append(observer)
         }
-        self.accountant.observer {
+        
+        self.staffObservers.append(self.accountant.observer { [weak self] in
             switch $0 {
-            case .available: self.accountant.processQueue()
+            case .available: self?.accountant.processQueue()
             case .busy: return
-            case .waitForProcessing: self.director.doAsyncWork(object: self.accountant)
+            case .waitForProcessing: (self?.accountant).apply(self?.director.doAsyncWork)
             }
-        }
-        self.director.observer {
+        })
+        
+        self.staffObservers.append(self.director.observer { [weak self] in
             switch $0 {
             case .available: return
             case .busy: return
             case .waitForProcessing: return
             }
-        }
+        })
     }
 }
