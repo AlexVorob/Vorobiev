@@ -65,7 +65,7 @@ class CarWashingService {
             }
         })
         
-        self.staffObservers.append(self.director.observer { [weak self] in
+        self.staffObservers.append(self.director.observer {
             switch $0 {
             case .available: return
             case .busy: return

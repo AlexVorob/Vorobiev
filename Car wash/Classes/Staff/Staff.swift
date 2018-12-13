@@ -40,11 +40,7 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
     }
     
     func finishProcessing() {
-        if self.countQueueObjects == 0 {
-            self.state = .waitForProcessing
-        } else {
-            self.queueObjects.dequeue().do(self.asyncWork)
-        }
+        self.repeatQueueProcessing()
     }
 
     func doAsyncWork(object: ProcessedObject) {
@@ -63,6 +59,14 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
             self.process(object: object)
             self.completeProcessing(object: object)
             self.finishProcessing()
+        }
+    }
+    
+    private func repeatQueueProcessing() {
+        if self.countQueueObjects == 0 {
+            self.state = .waitForProcessing
+        } else {
+            self.queueObjects.dequeue().do(self.asyncWork)
         }
     }
 }

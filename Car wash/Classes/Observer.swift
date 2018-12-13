@@ -12,15 +12,16 @@ class Observer: Hashable {
     
     typealias Handler = (Person.ProcessingState) -> ()
     
-    public var isObserving: Bool {
+    var isObserving: Bool {
         return self.sender != nil
     }
     
-    public var hashValue: Int {
+    var hashValue: Int {
         return ObjectIdentifier(self).hashValue
     }
     
     let handler: Handler
+    
     private weak var sender: Person?
     
     init(sender: Person, handler: @escaping Handler) {
