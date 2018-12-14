@@ -10,6 +10,18 @@ import Foundation
 
 class Staff<ProcessedObject: MoneyGiver>: Person {
     
+    override var state: ProcessingState {
+        get { return atomicState.value }
+        set {
+            guard self.state != newValue else { return }
+            if newValue == .available {
+                self.queueObjects.dequeue().do(self.doAsyncWork)
+            }
+            self.atomicState.value = newValue
+            self.notify(state: newValue)
+        }
+    }
+    
     public var countQueueObjects: Int {
         return self.queueObjects.count
     }
@@ -25,10 +37,6 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
     ) {
         self.name = name
         self.queue = queue
-    }
-    
-    func processQueue() {
-        self.queueObjects.dequeue().do(self.doAsyncWork)
     }
     
     func process(object: ProcessedObject) {

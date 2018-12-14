@@ -10,19 +10,13 @@ import Foundation
 
 class CarWashingService {
     
-    private var staffObservers = [Observer]()
+    private var staffObservers = Atomic([Person.Observer]())
 
     private let accountant: Accountant
     private let director: Director
     private let washers: Atomic<[Washer]>
     private let cars = Queue<Car>()
-    
-    deinit {
-        self.staffObservers.forEach {
-            $0.cancel()
-        }
-    }
-    
+        
     init(
         accountant: Accountant,
         director: Director,
@@ -54,23 +48,16 @@ class CarWashingService {
                 case .waitForProcessing: washer.apply(self?.accountant.doAsyncWork)
                 }
             }
-            self.staffObservers.append(observer)
+            self.staffObservers.value.append(observer)
         }
         
-        self.staffObservers.append(self.accountant.observer { [weak self] in
-            switch $0 {
-            case .available: self?.accountant.processQueue()
-            case .busy: return
-            case .waitForProcessing: (self?.accountant).apply(self?.director.doAsyncWork)
-            }
-        })
-        
-        self.staffObservers.append(self.director.observer {
+        let observer = self.accountant.observer { [weak self] in
             switch $0 {
             case .available: return
             case .busy: return
-            case .waitForProcessing: return
+            case .waitForProcessing: (self?.accountant).apply(self?.director.doAsyncWork)
             }
-        })
+        }
+        self.staffObservers.value.append(observer)
     }
 }
