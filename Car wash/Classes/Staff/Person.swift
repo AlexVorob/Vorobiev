@@ -42,21 +42,4 @@ class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGive
             $0 += money
         }
     }
-    
-//    func observer(handler: @escaping Observer.Handler) -> Observer {
-//        return self.atomicObservers.modify {
-//            let observer = Observer(sender: self, handler: handler)
-//            $0.append(observer)
-//            observer.handler(self.state)
-//
-//            return observer
-//        }
-//    }
-//
-//    private func notify(state: ProcessingState) {
-//        self.atomicObservers.modify {
-//            $0 = $0.filter { $0.isObserving }
-//            $0.forEach { $0.handler(state) }
-//        }
-//    }
 }

@@ -18,7 +18,6 @@ class ObservableObject<State> {
         return self.atomicObservers.modify {
             let observer = Observer(sender: self, handler: handler)
             $0.append(observer)
-            //observer.handler(self.state)
             
             return observer
         }

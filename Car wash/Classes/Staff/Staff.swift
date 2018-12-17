@@ -13,12 +13,18 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
     override var state: ProcessingState {
         get { return atomicState.value }
         set {
-            guard self.state != newValue else { return }
-            if newValue == .available {
-                self.queueObjects.dequeue().do(self.doAsyncWork)
+            self.atomicState.modify {
+                guard $0 != newValue else { return }
+                
+                if newValue == .available && !self.queueObjects.isEmpty {
+                    self.queueObjects.dequeue().do(self.doAsyncWork)
+                } else {
+                    $0 = newValue
+                    queue.async {
+                        self.notify(state: newValue)
+                    }
+                }
             }
-            self.atomicState.value = newValue
-            self.notify(state: newValue)
         }
     }
     
