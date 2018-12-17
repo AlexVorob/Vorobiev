@@ -17,12 +17,11 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
                 guard $0 != newValue else { return }
                 
                 if newValue == .available && !self.queueObjects.isEmpty {
-                    self.queueObjects.dequeue().do(self.doAsyncWork)
+                    $0 = .busy
+                    self.queueObjects.dequeue().do(self.asyncWork)
                 } else {
                     $0 = newValue
-                    queue.async {
-                        self.notify(state: newValue)
-                    }
+                    self.notify(state: newValue)
                 }
             }
         }

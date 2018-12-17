@@ -43,9 +43,11 @@ class CarWashingService {
         self.washers.value.forEach { washer in
             let observer = washer.observer { [weak washer, weak self] in
                 switch $0 {
-                case .available: self?.cars.dequeue().apply(washer?.doAsyncWork)
+                case .available: self?.executeAsync {
+                    self?.cars.dequeue().apply(washer?.doAsyncWork) }
                 case .busy: return
-                case .waitForProcessing: washer.apply(self?.accountant.doAsyncWork)
+                case .waitForProcessing: self?.executeAsync {
+                    washer.apply(self?.accountant.doAsyncWork) }
                 }
             }
             self.staffObservers.value.append(observer)
@@ -55,9 +57,38 @@ class CarWashingService {
             switch $0 {
             case .available: return
             case .busy: return
-            case .waitForProcessing: (self?.accountant).apply(self?.director.doAsyncWork)
+            case .waitForProcessing: self?.executeAsync {
+                (self?.accountant).apply(self?.director.doAsyncWork) }
             }
         }
         self.staffObservers.value.append(observer)
     }
+    
+    private func executeAsync(execute: @escaping F.Execute) {
+        DispatchQueue.background.async {
+            execute()
+        }
+    }
+}
+
+public struct Weak<Wrapped: AnyObject> {
+    
+    private(set) weak var value: Wrapped?
+    
+    public init(_ value: Wrapped) {
+        self.value = value
+    }
+}
+
+@discardableResult
+public func weakify<Wrapped: AnyObject>(_ value: Wrapped) -> Weak<Wrapped> {
+    return weakify(value) { _ in }
+}
+
+@discardableResult
+public func weakify<Wrapped: AnyObject>(_ value: Wrapped, execute: (Weak<Wrapped>) -> ()) -> Weak<Wrapped> {
+    let weak = Weak(value)
+    execute(weak)
+    
+    return weak
 }

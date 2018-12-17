@@ -15,7 +15,6 @@ class Manager<ProcessedObject: MoneyGiver & Statable>: Staff<ProcessedObject> {
     }
     
     override func completeProcessing(object: ProcessedObject) {
-        object.state = .available
-        super.finishProcessing()
+        object.state = .available // problem
     }
 }
