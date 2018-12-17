@@ -40,7 +40,7 @@ class CarWashingService {
     }
     
     private func initializationObservers() {
-        self.washers.value.forEach { washer in
+       self.staffObservers.value += self.washers.value.map { washer in
             let observer = washer.observer { [weak washer, weak self] in
                 switch $0 {
                 case .available: self?.executeAsync {
@@ -50,7 +50,8 @@ class CarWashingService {
                     washer.apply(self?.accountant.doAsyncWork) }
                 }
             }
-            self.staffObservers.value.append(observer)
+        
+            return observer
         }
         
         let observer = self.accountant.observer { [weak self] in
@@ -69,26 +70,4 @@ class CarWashingService {
             execute()
         }
     }
-}
-
-public struct Weak<Wrapped: AnyObject> {
-    
-    private(set) weak var value: Wrapped?
-    
-    public init(_ value: Wrapped) {
-        self.value = value
-    }
-}
-
-@discardableResult
-public func weakify<Wrapped: AnyObject>(_ value: Wrapped) -> Weak<Wrapped> {
-    return weakify(value) { _ in }
-}
-
-@discardableResult
-public func weakify<Wrapped: AnyObject>(_ value: Wrapped, execute: (Weak<Wrapped>) -> ()) -> Weak<Wrapped> {
-    let weak = Weak(value)
-    execute(weak)
-    
-    return weak
 }
