@@ -130,7 +130,6 @@
 				3F274A8A2179C56B0053516C /* CarWashingService.swift */,
 				5877B3F521874E8E00CE187E /* Queue.swift */,
 				5853AAC22192D05700CE3B7F /* CarFactory.swift */,
-				584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -144,7 +143,6 @@
 				587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */,
 				587D53942183075D00BC4D2A /* Strideable+Extensions.swift */,
 				58616BFD2189DEA700853320 /* NSLocking+Extensions.swift */,
-				584AAA7E21C39D3D0072D1F7 /* ObservableObject+Extentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -154,6 +152,8 @@
 			children = (
 				585186D321819BF3008AD9AA /* F.swift */,
 				58616BFB2189DC2F00853320 /* Atomic.swift */,
+				584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */,
+				584AAA7E21C39D3D0072D1F7 /* ObservableObject+Extentions.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
