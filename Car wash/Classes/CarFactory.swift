@@ -23,8 +23,7 @@ class CarFactory {
     }
     
     deinit {
-        self.stop()
-        print("deinit !!!!!!!")
+        timerToken?.stop()
     }
     
     init(carWashingService: CarWashingService, queue: DispatchQueue = .background) {

@@ -22,12 +22,12 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
                 } else {
                     $0 = newValue
                     self.notify(state: newValue)
-                }
+               }
             }
         }
     }
     
-    public var countQueueObjects: Int {
+    private var countQueueObjects: Int {
         return self.queueObjects.count
     }
     
@@ -76,10 +76,13 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
     }
     
     private func repeatQueueProcessing() {
-        if self.countQueueObjects == 0 {
-            self.state = .waitForProcessing
-        } else {
-            self.queueObjects.dequeue().do(self.asyncWork)
+        self.atomicState.modify {
+            if self.countQueueObjects == 0 {
+                $0 = .waitForProcessing
+                self.notify(state: $0)
+            } else {
+                self.queueObjects.dequeue().do(self.asyncWork)
+            }
         }
     }
 }

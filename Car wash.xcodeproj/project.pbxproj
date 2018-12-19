@@ -20,7 +20,7 @@
 		58325AEE21805A360057AFC2 /* DispatchTime+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58325AED21805A360057AFC2 /* DispatchTime+Extensions.swift */; };
 		5834E9BE21B8074E00AF5EB2 /* Director.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5834E9BD21B8074E00AF5EB2 /* Director.swift */; };
 		584AAA7D21C3970C0072D1F7 /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */; };
-		584AAA7F21C39D3D0072D1F7 /* ObservableObject+Extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA7E21C39D3D0072D1F7 /* ObservableObject+Extentions.swift */; };
+		584AAA7F21C39D3D0072D1F7 /* ObservableObject.Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */; };
 		585186D421819BF3008AD9AA /* F.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585186D321819BF3008AD9AA /* F.swift */; };
 		5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC22192D05700CE3B7F /* CarFactory.swift */; };
 		5853AAC521931D0200CE3B7F /* Statable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC421931D0200CE3B7F /* Statable.swift */; };
@@ -60,7 +60,7 @@
 		58325AED21805A360057AFC2 /* DispatchTime+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DispatchTime+Extensions.swift"; sourceTree = "<group>"; };
 		5834E9BD21B8074E00AF5EB2 /* Director.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
 		584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
-		584AAA7E21C39D3D0072D1F7 /* ObservableObject+Extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ObservableObject+Extentions.swift"; sourceTree = "<group>"; };
+		584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.Observer.swift; sourceTree = "<group>"; };
 		585186D321819BF3008AD9AA /* F.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F.swift; sourceTree = "<group>"; };
 		5853AAC22192D05700CE3B7F /* CarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarFactory.swift; sourceTree = "<group>"; };
 		5853AAC421931D0200CE3B7F /* Statable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statable.swift; sourceTree = "<group>"; };
@@ -128,7 +128,6 @@
 				5877418221B7EBEA00622089 /* Staff */,
 				3F274A7C2179C0970053516C /* Car.swift */,
 				3F274A8A2179C56B0053516C /* CarWashingService.swift */,
-				5877B3F521874E8E00CE187E /* Queue.swift */,
 				5853AAC22192D05700CE3B7F /* CarFactory.swift */,
 			);
 			path = Classes;
@@ -152,8 +151,9 @@
 			children = (
 				585186D321819BF3008AD9AA /* F.swift */,
 				58616BFB2189DC2F00853320 /* Atomic.swift */,
+				5877B3F521874E8E00CE187E /* Queue.swift */,
 				584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */,
-				584AAA7E21C39D3D0072D1F7 /* ObservableObject+Extentions.swift */,
+				584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -251,7 +251,7 @@
 				58554F1D219ABE2A0069EAF6 /* Manager.swift in Sources */,
 				5834E9BE21B8074E00AF5EB2 /* Director.swift in Sources */,
 				58616BFE2189DEA700853320 /* NSLocking+Extensions.swift in Sources */,
-				584AAA7F21C39D3D0072D1F7 /* ObservableObject+Extentions.swift in Sources */,
+				584AAA7F21C39D3D0072D1F7 /* ObservableObject.Observer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

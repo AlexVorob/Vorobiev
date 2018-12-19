@@ -10,8 +10,7 @@ import Foundation
 
 class CarWashingService {
     
-    private var staffObservers = Atomic([Person.Observer]())
-
+    private let staffObservers = Atomic([Person.Observer]())
     private let accountant: Accountant
     private let director: Director
     private let washers: Atomic<[Washer]>
@@ -25,7 +24,7 @@ class CarWashingService {
         self.accountant = accountant
         self.director = director
         self.washers = Atomic(washersAvailable)
-        self.initializationObservers()
+        self.setObservers()
     }
     
     func wash(car: Car) {
@@ -38,8 +37,8 @@ class CarWashingService {
             }
         }
     }
-    
-    private func initializationObservers() {
+
+    private func setObservers() {
        self.staffObservers.value += self.washers.value.map { washer in
             let observer = washer.observer { [weak washer, weak self] in
                 switch $0 {
@@ -65,9 +64,9 @@ class CarWashingService {
         self.staffObservers.value.append(observer)
     }
     
-    private func executeAsync(execute: @escaping F.Execute) {
+    private func executeAsync(handler: @escaping () -> ()) {
         DispatchQueue.background.async {
-            execute()
+            handler()
         }
     }
 }
