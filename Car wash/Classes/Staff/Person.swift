@@ -8,7 +8,12 @@
 
 import Foundation
 
-class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGiver, Statable {
+class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGiver, Statable, Processable {
+    
+    func processObject() {
+        print("pro!")
+    }
+    
     
     enum ProcessingState {
         case busy

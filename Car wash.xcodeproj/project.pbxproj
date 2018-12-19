@@ -22,6 +22,8 @@
 		584AAA7D21C3970C0072D1F7 /* ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */; };
 		584AAA7F21C39D3D0072D1F7 /* ObservableObject.Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */; };
 		585186D421819BF3008AD9AA /* F.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585186D321819BF3008AD9AA /* F.swift */; };
+		5853637521CA64ED00C36038 /* Сontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853637421CA64ED00C36038 /* Сontroller.swift */; };
+		5853637721CA651C00C36038 /* Processable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853637621CA651C00C36038 /* Processable.swift */; };
 		5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC22192D05700CE3B7F /* CarFactory.swift */; };
 		5853AAC521931D0200CE3B7F /* Statable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5853AAC421931D0200CE3B7F /* Statable.swift */; };
 		58554F1D219ABE2A0069EAF6 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58554F1C219ABE2A0069EAF6 /* Manager.swift */; };
@@ -62,6 +64,8 @@
 		584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.swift; sourceTree = "<group>"; };
 		584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableObject.Observer.swift; sourceTree = "<group>"; };
 		585186D321819BF3008AD9AA /* F.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F.swift; sourceTree = "<group>"; };
+		5853637421CA64ED00C36038 /* Сontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Сontroller.swift"; sourceTree = "<group>"; };
+		5853637621CA651C00C36038 /* Processable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Processable.swift; sourceTree = "<group>"; };
 		5853AAC22192D05700CE3B7F /* CarFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarFactory.swift; sourceTree = "<group>"; };
 		5853AAC421931D0200CE3B7F /* Statable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statable.swift; sourceTree = "<group>"; };
 		58554F1C219ABE2A0069EAF6 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
@@ -118,6 +122,7 @@
 				5801E43D217FC9A8007E347F /* MoneyGiver.swift */,
 				5801E43F217FCA9F007E347F /* MoneyReceiver.swift */,
 				5853AAC421931D0200CE3B7F /* Statable.swift */,
+				5853637621CA651C00C36038 /* Processable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				5834E9BD21B8074E00AF5EB2 /* Director.swift */,
 				3F274A782179BF870053516C /* Accountant.swift */,
 				58554F1C219ABE2A0069EAF6 /* Manager.swift */,
+				5853637421CA64ED00C36038 /* Сontroller.swift */,
 			);
 			path = Staff;
 			sourceTree = "<group>";
@@ -233,12 +239,14 @@
 				587D53952183075D00BC4D2A /* Strideable+Extensions.swift in Sources */,
 				5801E440217FCA9F007E347F /* MoneyReceiver.swift in Sources */,
 				585ED5D221BFF6B500ECB33B /* Person.swift in Sources */,
+				5853637721CA651C00C36038 /* Processable.swift in Sources */,
 				584AAA7D21C3970C0072D1F7 /* ObservableObject.swift in Sources */,
 				58325AEC218058210057AFC2 /* DispatchQueue+Extensions.swift in Sources */,
 				3F274A772179BED60053516C /* Washer.swift in Sources */,
 				3F274A792179BF870053516C /* Accountant.swift in Sources */,
 				585186D421819BF3008AD9AA /* F.swift in Sources */,
 				587D53932183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift in Sources */,
+				5853637521CA64ED00C36038 /* Сontroller.swift in Sources */,
 				5801E43C217F0179007E347F /* Optional+Extensions.swift in Sources */,
 				58616BFC2189DC2F00853320 /* Atomic.swift in Sources */,
 				5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */,
