@@ -10,5 +10,7 @@ import Foundation
 
 protocol Processable {
     
-    func processObject()
+    associatedtype ProcessObject
+    
+    func processObject(processObject: ProcessObject)
 }

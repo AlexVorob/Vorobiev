@@ -1,6 +1,6 @@
 //
 //  Staff.swift
-//  Car wash
+//  Car wash 
 //
 //  Created by Student on 26/10/18.
 //  Copyright © 2018 IDAP. All rights reserved.
@@ -8,32 +8,19 @@
 
 import Foundation
 
-class Staff<ProcessedObject: MoneyGiver>: Person {
-    
+class Staff<ProcessedObject: MoneyGiver>: Person, Processable {
+
     override var state: ProcessingState {
         get { return atomicState.value }
         set {
             self.atomicState.modify {
-                guard $0 != newValue else { return }
-                
-                if newValue == .available && !self.queueObjects.isEmpty {
-                    $0 = .busy
-                    self.queueObjects.dequeue().do(self.asyncWork)
-                } else {
-                    $0 = newValue
-                    self.notify(state: newValue)
-               }
+                $0 = newValue
+                self.notify(state: newValue)
             }
         }
     }
     
-    private var countQueueObjects: Int {
-        return self.queueObjects.count
-    }
-    
     let name: String
-    let queueObjects = Queue<ProcessedObject>()
-    
     private let queue: DispatchQueue
     
     init (
@@ -53,35 +40,18 @@ class Staff<ProcessedObject: MoneyGiver>: Person {
     }
     
     func finishProcessing() {
-        self.repeatQueueProcessing()
+        //self.state = .waitForProcessing
     }
 
-    func doAsyncWork(object: ProcessedObject) {
+    func processObject(processObject: ProcessedObject) {
         self.atomicState.modify {
             if $0 == .available {
                 $0 = .busy
-                self.asyncWork(object: object)
-            } else {
-                self.queueObjects.enqueue(value: object)
-            }
-        }
-    }
-    
-    private func asyncWork(object: ProcessedObject) {
-        self.queue.asyncAfter(deadline: .after(interval: .random(in: 0.0...1.0))) {
-            self.process(object: object)
-            self.completeProcessing(object: object)
-            self.finishProcessing()
-        }
-    }
-    
-    private func repeatQueueProcessing() {
-        self.atomicState.modify {
-            if self.countQueueObjects == 0 {
-                $0 = .waitForProcessing
-                self.notify(state: $0)
-            } else {
-                self.queueObjects.dequeue().do(self.asyncWork)
+                queue.asyncAfter(deadline: .after(interval: .random(in: 0.0...1.0))) {
+                    self.process(object: processObject)
+                    self.completeProcessing(object: processObject)
+                    self.finishProcessing()
+                }
             }
         }
     }

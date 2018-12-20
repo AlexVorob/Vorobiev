@@ -20,7 +20,7 @@ extension ObservableObject {
             return ObjectIdentifier(self).hashValue
         }
         
-        let handler: Handler
+        private(set) var handler: Handler
         
         private weak var sender: ObservableObject?
         

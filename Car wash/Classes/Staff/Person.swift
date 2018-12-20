@@ -8,12 +8,7 @@
 
 import Foundation
 
-class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGiver, Statable, Processable {
-    
-    func processObject() {
-        print("pro!")
-    }
-    
+class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGiver, Statable, CustomStringConvertible {
     
     enum ProcessingState {
         case busy
@@ -46,5 +41,9 @@ class Person: ObservableObject<Person.ProcessingState>, MoneyReceiver, MoneyGive
         self.atomicMoney.modify {
             $0 += money
         }
+    }
+    
+    var description: String {
+        return "\(type(of: self))"
     }
 }

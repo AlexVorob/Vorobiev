@@ -16,5 +16,6 @@ class Manager<ProcessedObject: MoneyGiver & Statable>: Staff<ProcessedObject> {
     
     override func completeProcessing(object: ProcessedObject) {
         object.state = .available
+        //print("\(self) take money from \(object) - \(self.money)")
     }
 }
