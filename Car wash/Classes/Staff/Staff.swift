@@ -40,7 +40,7 @@ class Staff<ProcessedObject: MoneyGiver>: Person, Processable {
     }
     
     func finishProcessing() {
-        //self.state = .waitForProcessing
+        self.state = .waitForProcessing
     }
 
     func processObject(processObject: ProcessedObject) {

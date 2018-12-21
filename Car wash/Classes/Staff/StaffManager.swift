@@ -10,6 +10,10 @@ import Foundation
 
 class StaffManager<Object: Staff<ProcessObject>, ProcessObject: MoneyGiver>: ObservableObject<Object> {
     
+    private var countQueue: Int {
+        return self.queueProcessObject.count
+    }
+    
     private var queueStaff = Atomic([Object]())
     private let queueProcessObject = Queue<ProcessObject>()
     private let staffObservers = Atomic([Person.Observer]())
@@ -26,11 +30,20 @@ class StaffManager<Object: Staff<ProcessObject>, ProcessObject: MoneyGiver>: Obs
     
     func doWork(object: ProcessObject) {
         self.queueStaff.transform {
-            let availableStaff = $0.first { $0.state == .available }
-            if let staff = availableStaff {
-                staff.processObject(processObject: object)
+            let availableObject = $0.first {
+                $0.state == .available
+            }
+            
+            let enqueueProcessingObject = { self.queueProcessObject.enqueue(value: object) }
+            
+            if self.countQueue == 0 {
+                if let availableObject = availableObject {
+                    availableObject.processObject(processObject: object)
+                } else {
+                    enqueueProcessingObject()
+                }
             } else {
-                self.queueProcessObject.enqueue(value: object)
+                enqueueProcessingObject()
             }
         }
     }
@@ -44,6 +57,7 @@ class StaffManager<Object: Staff<ProcessObject>, ProcessObject: MoneyGiver>: Obs
                         self?.queueProcessObject.dequeue().apply(object?.processObject)
                     case .busy: return
                     case .waitForProcessing:
+                        //print("\(type(of: self)) - \(self!.countQueue)")
                         object.apply(self?.notify)
                     }
                 }
