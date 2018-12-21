@@ -8,37 +8,37 @@
 
 import Foundation
 
-class StaffManager<Object: Staff<ProcessObject>, ProcessObject: MoneyGiver>: ObservableObject<Object> {
+class StaffManager<Process: Staff<ProcessObject>, ProcessObject: MoneyGiver>: ObservableObject<Process> {
     
     private var countQueue: Int {
-        return self.queueProcessObject.count
+        return self.processObjectsQueue.count
     }
     
-    private var queueStaff = Atomic([Object]())
-    private let queueProcessObject = Queue<ProcessObject>()
+    private let staffQueue = Atomic([Process]())
+    private let processObjectsQueue = Queue<ProcessObject>()
     private let staffObservers = Atomic([Person.Observer]())
 
-    init(person: [Object]) {
-        self.queueStaff.value = person
+    init(person: [Process]) {
+        self.staffQueue.value = person
         super.init()
         self.setObservers()
     }
     
-    convenience init(person: Object) {
+    convenience init(person: Process) {
         self.init(person: [person])
     }
     
-    func doWork(object: ProcessObject) {
-        self.queueStaff.transform {
+    func performStaffWork(processObject: ProcessObject) {
+        self.staffQueue.transform {
             let availableObject = $0.first {
                 $0.state == .available
             }
             
-            let enqueueProcessingObject = { self.queueProcessObject.enqueue(value: object) }
+            let enqueueProcessingObject = { self.processObjectsQueue.enqueue(value: processObject) }
             
             if self.countQueue == 0 {
                 if let availableObject = availableObject {
-                    availableObject.processObject(processObject: object)
+                    availableObject.processObject(processObject: processObject)
                 } else {
                     enqueueProcessingObject()
                 }
@@ -49,15 +49,14 @@ class StaffManager<Object: Staff<ProcessObject>, ProcessObject: MoneyGiver>: Obs
     }
     
     private func setObservers() {
-        self.staffObservers.value += self.queueStaff.value.map { object in
+        self.staffObservers.value += self.staffQueue.value.map { object in
             let observer = object.observer { [weak object, weak self] state in
                 DispatchQueue.background.async {
                     switch state {
                     case .available:
-                        self?.queueProcessObject.dequeue().apply(object?.processObject)
+                        self?.processObjectsQueue.dequeue().apply(object?.processObject)
                     case .busy: return
                     case .waitForProcessing:
-                        //print("\(type(of: self)) - \(self!.countQueue)")
                         object.apply(self?.notify)
                     }
                 }

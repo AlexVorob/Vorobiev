@@ -26,11 +26,11 @@ class CarWashingService {
     }
     
     func wash(car: Car) {
-        self.washerManager.doWork(object: car)
+        self.washerManager.performStaffWork(processObject: car)
     }
     
     private func setObservers() {
-        self.washerManager.observer(handler: self.accountantManager.doWork)
-        self.accountantManager.observer(handler: self.directorManager.doWork)
+        self.washerManager.observer(handler: self.accountantManager.performStaffWork)
+        self.accountantManager.observer(handler: self.directorManager.performStaffWork)
     }
 }
