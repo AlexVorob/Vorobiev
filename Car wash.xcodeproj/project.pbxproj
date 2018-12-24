@@ -33,6 +33,8 @@
 		5877B3F621874E8E00CE187E /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5877B3F521874E8E00CE187E /* Queue.swift */; };
 		587D53932183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */; };
 		587D53952183075D00BC4D2A /* Strideable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 587D53942183075D00BC4D2A /* Strideable+Extensions.swift */; };
+		588387EB21D0D0A70009F740 /* Cancellable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588387EA21D0D0A70009F740 /* Cancellable.swift */; };
+		588387ED21D0D4050009F740 /* CancellableProperty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588387EC21D0D4050009F740 /* CancellableProperty.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +77,8 @@
 		5877B3F521874E8E00CE187E /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		587D53922183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RangeReplaceableCollection+Extensions.swift"; sourceTree = "<group>"; };
 		587D53942183075D00BC4D2A /* Strideable+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strideable+Extensions.swift"; sourceTree = "<group>"; };
+		588387EA21D0D0A70009F740 /* Cancellable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cancellable.swift; sourceTree = "<group>"; };
+		588387EC21D0D4050009F740 /* CancellableProperty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancellableProperty.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 				5801E43F217FCA9F007E347F /* MoneyReceiver.swift */,
 				5853AAC421931D0200CE3B7F /* Statable.swift */,
 				5853637621CA651C00C36038 /* Processable.swift */,
+				588387EA21D0D0A70009F740 /* Cancellable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -159,6 +164,7 @@
 				5877B3F521874E8E00CE187E /* Queue.swift */,
 				584AAA7C21C3970C0072D1F7 /* ObservableObject.swift */,
 				584AAA7E21C39D3D0072D1F7 /* ObservableObject.Observer.swift */,
+				588387EC21D0D4050009F740 /* CancellableProperty.swift */,
 			);
 			path = Types;
 			sourceTree = "<group>";
@@ -243,6 +249,7 @@
 				584AAA7D21C3970C0072D1F7 /* ObservableObject.swift in Sources */,
 				58325AEC218058210057AFC2 /* DispatchQueue+Extensions.swift in Sources */,
 				3F274A772179BED60053516C /* Washer.swift in Sources */,
+				588387EB21D0D0A70009F740 /* Cancellable.swift in Sources */,
 				3F274A792179BF870053516C /* Accountant.swift in Sources */,
 				585186D421819BF3008AD9AA /* F.swift in Sources */,
 				587D53932183012000BC4D2A /* RangeReplaceableCollection+Extensions.swift in Sources */,
@@ -252,6 +259,7 @@
 				5853AAC32192D05700CE3B7F /* CarFactory.swift in Sources */,
 				58325AEE21805A360057AFC2 /* DispatchTime+Extensions.swift in Sources */,
 				3F274A7D2179C0970053516C /* Car.swift in Sources */,
+				588387ED21D0D4050009F740 /* CancellableProperty.swift in Sources */,
 				5801E43E217FC9A8007E347F /* MoneyGiver.swift in Sources */,
 				3F274A8B2179C56B0053516C /* CarWashingService.swift in Sources */,
 				5877B3F621874E8E00CE187E /* Queue.swift in Sources */,

@@ -41,7 +41,7 @@ extension DispatchQueue {
         }
     }
     
-    class TimerToken {
+    class TimerToken: Cancellable {
         
         private let tokenState = Atomic(true)
         
@@ -49,7 +49,14 @@ extension DispatchQueue {
             return self.tokenState.value
         }
         
-        func stop() {
+        var isCancelled: Bool {
+            return !self.isRunning
+        }
+//        func stop() {
+//            self.tokenState.value = false
+//        }
+        
+        func cancel() {
             self.tokenState.value = false
         }
     }

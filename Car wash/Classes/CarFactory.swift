@@ -15,7 +15,7 @@ class CarFactory {
     private let carWashingService: CarWashingService
     
     private var timerToken: DispatchQueue.TimerToken? {
-        willSet { timerToken?.stop() }
+        willSet { timerToken?.cancel() }
     }
     
     var isTokenRunning: Bool {
@@ -23,7 +23,7 @@ class CarFactory {
     }
     
     deinit {
-        timerToken?.stop()
+        timerToken?.cancel()
     }
     
     init(carWashingService: CarWashingService, queue: DispatchQueue = .background) {

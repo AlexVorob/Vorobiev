@@ -14,6 +14,8 @@ class CarWashingService {
     private let accountantManager: StaffManager<Accountant, Washer>
     private let directorManager: StaffManager<Director, Accountant>
     
+    private var managerObservers = CompositeCancellableProperty()
+    
     init(
         accountant: Accountant,
         director: Director,
@@ -30,7 +32,9 @@ class CarWashingService {
     }
     
     private func setObservers() {
-        self.washerManager.observer(handler: self.accountantManager.performStaffWork)
-        self.accountantManager.observer(handler: self.directorManager.performStaffWork)
+        let washerManagerObserver = self.washerManager.observer(handler: self.accountantManager.performStaffWork)
+        let accountantManagerObserver = self.accountantManager.observer(handler: self.directorManager.performStaffWork)
+        
+        self.managerObservers.value = [washerManagerObserver, accountantManagerObserver]
     }
 }

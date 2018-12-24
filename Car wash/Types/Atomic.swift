@@ -22,6 +22,7 @@ public class Atomic<Value> {
     
     private let lock: NSRecursiveLock
     private let didSet: PropertyObserver?
+    private let willSet: PropertyObserver?
     
     public init(
         _ value: ValueType,
@@ -32,12 +33,14 @@ public class Atomic<Value> {
         self.mutableValue = value
         self.lock = lock
         self.didSet = didSet
+        self.willSet = willSet
     }
     
     @discardableResult
     public func modify<Result>(_ action: (inout ValueType) -> Result) -> Result {
         return self.lock.locked {
             let oldValue = self.mutableValue
+//            let newValue = self.mutableValue
             
             defer {
                 self.didSet?((oldValue, self.mutableValue))
