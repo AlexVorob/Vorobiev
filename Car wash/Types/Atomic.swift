@@ -40,13 +40,17 @@ public class Atomic<Value> {
     public func modify<Result>(_ action: (inout ValueType) -> Result) -> Result {
         return self.lock.locked {
             let oldValue = self.mutableValue
-//            let newValue = self.mutableValue
+            var newValue = self.mutableValue
+            
+            var value = action(&newValue)
+            self.willSet?((self.mutableValue, newValue))
+            self.mutableValue = newValue
             
             defer {
                 self.didSet?((oldValue, self.mutableValue))
             }
             
-            return action(&self.mutableValue)
+            return value
         }
     }
     
